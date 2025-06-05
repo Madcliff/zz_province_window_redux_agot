@@ -11,7 +11,7 @@ window = {
 	layer = windows_layer
 	#AGOT Modified
 	# size = { 605 750 }
-	size = { 697 895 }
+	size = { 797 895 }
 
 	background = {
 		texture = "gfx/interface/component_tiles/tile_window_background_subwindow.dds"
@@ -1436,10 +1436,11 @@ window = {
 						layoutpolicy_vertical = expanding
 						#AGOT Added
 						visible = "[ProvinceIsNotRuin]"
-
-						margin = { 15 0 }
+						### zzz_zara changed
+						# margin = { 15 0 }
+						margin = { 25 0 }
 						margin_bottom = 10
-						minimumsize = { 171 0 }
+						minimumsize = { 200 0 }
 						spacing = 5
 
 						background = {
@@ -1900,13 +1901,14 @@ window = {
 								}
 
 								vbox = {
+									visible = "[And(HoldingView.HasHolding, Not(HoldingView.IsBeingConstructed))]"
 									expand = {
 										#visible = "[Not(And(HoldingView.HasDuchyCapitalBuildingSlot, HoldingView.HasSpecialBuildingSlot ))]"
 									}
 									
 									
 									vbox = {	
-
+										visible = "[And(HoldingView.HasHolding, Not(HoldingView.IsBeingConstructed))]"
 										parentanchor = top|left		
 										layoutpolicy_vertical = expanding
 										layoutpolicy_horizontal = expanding
@@ -1914,6 +1916,7 @@ window = {
 										max_height = 190
 										spacer = { size = { 0 30 } }
 										scrollbox = {
+											visible = "[And(HoldingView.HasHolding, Not(HoldingView.IsBeingConstructed))]"
 											layoutpolicy_vertical = expanding
 											layoutpolicy_horizontal = expanding
 								
@@ -2122,7 +2125,7 @@ window = {
 
 					vbox = {
 						layoutpolicy_vertical = expanding
-						margin_right = 3
+						margin_right = 20
 
 						expand = {}
 
@@ -2144,6 +2147,7 @@ window = {
 					### BOTTOM RIGHT
 					vbox = {
 						layoutpolicy_vertical = expanding
+						margin_right = 20
 
 						expand = {}
 
