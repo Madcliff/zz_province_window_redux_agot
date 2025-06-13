@@ -52,6 +52,7 @@ window = {
 		on_start = "[GetVariableSystem.Clear( 'hide_bottom_left_HUD' )]"
 		#AGOT Added
 		on_start = "[GetVariableSystem.Clear( 'window_ruins_confirm' )]"
+		on_start = "[GetVariableSystem.Clear( 'zz_window_ruins_confirm' )]"
 	
 
 		using = Animation_FadeOut_Standard
@@ -1838,6 +1839,8 @@ window = {
 							#AGOT Added
 							agot_county_view_restore_ruins_button = {}
 
+							
+
 							### BOTTOM LEFT
 							widget = {
 								parentanchor = bottom|left
@@ -1899,14 +1902,14 @@ window = {
 										mirror = vertical
 									}
 								}
-
+								
 								vbox = {
-									visible = "[And(HoldingView.HasHolding, Not(HoldingView.IsBeingConstructed))]"
+									visible = "[And( HoldingView.HasHolding, Not(HoldingView.IsBeingConstructed) ) ]"
 									expand = {
 										#visible = "[Not(And(HoldingView.HasDuchyCapitalBuildingSlot, HoldingView.HasSpecialBuildingSlot ))]"
 									}
 									
-									
+									zz_agot_county_view_restore_ruins_button = {}
 									vbox = {	
 										visible = "[And(HoldingView.HasHolding, Not(HoldingView.IsBeingConstructed))]"
 										parentanchor = top|left		
@@ -1995,124 +1998,6 @@ window = {
 
 									### end ADD BUILDING SLOT ###
 									
-									
-									hbox = {
-										layoutpolicy_horizontal = expanding
-										margin = { 5 0 }
-
-										button_standard = {
-											name = "toggle_find_vassal"
-											visible = "[And( ObjectsEqual( HoldingView.GetTitle.GetHolder, GetPlayer ), Not(HoldingView.GetTitle.IsLeasedOut) )]"
-											enabled = "[HoldingView.CanGrantTitle]"
-											text = "FIND_VASSAL_HEADER"
-											onclick = "[HoldingView.ToggleFindVassalListWindow]"
-											tooltip = "FIND_VASSAL_BUTTON_HOLDING_VIEW_TOOLTIP"
-											max_width = 150
-										}
-										expand = {}
-									}
-
-									hbox = {
-										datacontext = "[HoldingView.GetTitle.GetLesseeOrHolder]"
-										visible = "[And(NotEqualTo_uint32( HoldingView.GetCountyTitle.GetHolder.GetID, HoldingView.GetTitle.GetLesseeOrHolder.GetID ), HoldingView.GetTitle.HasHolder)]"
-										layoutpolicy_horizontal = expanding
-
-										portrait_head_small = {
-											blockoverride "opinion_box" {}
-										}
-
-										vbox = {
-											name = "theocracy_property"
-											datacontext = "[HoldingView.GetTitle.GetLesseeOrHolder]"
-											layoutpolicy_vertical = expanding
-											margin_top = 4
-											margin_bottom = 7
-											margin_left = 2
-
-											expand = {}
-
-											hbox = {
-												layoutpolicy_horizontal = expanding
-												
-												hbox = {
-													datacontext = "[HoldingView.GetTitle]"
-													visible = "[Title.IsUnderTheocraticLease]"
-													tooltip = "CHURCH_PROPERTY_TOOLTIP"
-													layoutpolicy_horizontal = expanding
-
-													icon = {
-														name = "church_property"
-														texture = "gfx/interface/icons/icon_holding_church.dds"
-														size = { 30 30 }
-													}
-
-													expand = {}
-												}
-												
-												container = {
-													name = "revoke_lease_button"
-													datacontext = "[HoldingView.GetTitle]"
-													visible = "[Title.IsLeasedOut]"
-
-													button_round  = {
-														datacontext = "[Title.GetLessee]"
-														visible = "[And( Or(Title.GetHolder.IsLocalPlayer, Title.GetHolder.IsOtherLiegeOrAbove( GetPlayer )), Character.IsPlayerInteractionShownAndCanPickTitle('revoke_leased_title_interaction', Title.Self) )]"
-														enabled = "[Character.IsPlayerInteractionWithTargetTitleValid('revoke_leased_title_interaction', Title.Self)]"
-														tooltip = "[Character.GetPlayerInteractionWithTargetTitleTooltip('revoke_leased_title_interaction', Title.Self)]"
-														oversound = "event:/SFX/UI/Generic/sfx_ui_generic_pointer_over"
-														clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_select"
-
-														button_revoke_lease = {
-															parentanchor = center
-															onclick = "[Character.OpenPlayerInteractionWithTargetTitle('revoke_leased_title_interaction', Title.Self)]"
-														}
-													}
-												}
-											}
-
-											text_single = {
-												datacontext = "[HoldingView.GetTitle]"
-												#AGOT Modified, Ruins
-												#visible = "[Not(Title.IsLeasedOut)]"
-												visible = "[And(Not(Title.IsLeasedOut), Not(Character.HasTrait(GetTrait('ruin').Self)))]"
-												layoutpolicy_horizontal = expanding
-												text = "HOLDING_VIEW_HOLDER"
-												default_format = "#low"
-											}
-
-											text_single = {
-												datacontext = "[HoldingView.GetTitle]"
-												visible = "[Title.IsLeasedOut]"
-												layoutpolicy_horizontal = expanding
-												text = "HOLDING_VIEW_LESSEE"
-												default_format = "#low"
-											}
-
-											text_multi = {
-												#AGOT Modified, Ruins
-												#visible = "[Character.HasRelationTo( GetPlayer )]"
-												visible = "[And(Character.HasRelationTo( GetPlayer ), Not(Character.HasTrait(GetTrait('ruin').Self)))]"
-												layoutpolicy_horizontal = expanding
-												text = "[Character.GetRelationToString( GetPlayer )]"
-												tooltip = "EXTENDED_RELATIONS_TOOLTIP"
-												default_format = "#low"
-												autoresize = yes
-												maximumsize = { 130 72 }
-											}
-
-											text_multi = {
-												#AGOT Added, Ruins
-												using = agot_county_view_is_not_ruin
-												layoutpolicy_horizontal = expanding
-												text = "[Character.GetShortUIName]"
-												format_override = { high medium }
-												autoresize = yes
-												maximumsize = { 130 72 }
-											}
-										}
-
-										expand = {}
-									}
 									expand = {
 										#visible = "[And(HoldingView.HasDuchyCapitalBuildingSlot, HoldingView.HasSpecialBuildingSlot )]"
 									}
@@ -2147,7 +2032,8 @@ window = {
 					### BOTTOM RIGHT
 					vbox = {
 						layoutpolicy_vertical = expanding
-						margin_right = 20
+						margin_right = 20 
+						margin_bottom = 10
 
 						expand = {}
 
@@ -2751,6 +2637,8 @@ window = {
 	agot_county_view_ruins_reconstruct_confirm = {}
 	holding_type_swap_selection_view = {}
 	dragon_swap_pit_selection_view = {}
+	zz_agot_county_view_ruins_blocker = {}
+	zz_agot_county_view_ruins_reconstruct_confirm = {}
 }
 
 ######################################################

@@ -7,6 +7,11 @@
 		scope:zz_county.county = {
 			has_variable = has_dragonkeeper_order 
 		}
+		OR = {
+			scope:zz_county.county.holder = ROOT
+			scope:zz_county.county.holder.top_liege = ROOT
+		}
+		
 	}
 }
 

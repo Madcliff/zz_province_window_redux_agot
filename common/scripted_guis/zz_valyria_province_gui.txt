@@ -4,7 +4,11 @@
 		scope:player = {
 			gold >= 1500
 		}
-		county.holder = scope:player
+		OR = {
+			county.holder = scope:player
+			county.holder.top_liege = scope:player
+		}
+		
 	}
 	is_shown = {
 		not = {
@@ -117,5 +121,25 @@ zz_valyria_has_trading_post ={
 		scope:player = {
 			gold >= 2500
 		}
+	}
+}
+
+
+zz_agot_is_unrestored = {
+	scope = title
+	is_shown = {
+		global_var:zz_acm = 1
+		has_holding_type = ruin_holding
+		NOT = {
+			county ?= {
+				holder ?= { has_government = ruins_government }
+			}
+		}
+	}
+}
+
+zz_valyria_colonise = {
+	is_shown = {
+		global_var:zz_acm = 1
 	}
 }
