@@ -143,3 +143,28 @@ zz_valyria_colonise = {
 		global_var:zz_acm = 1
 	}
 }
+
+
+zz_valyria_dragon_visit = {
+	scope = province 	
+	is_shown = {
+		scope:actor = { 
+			has_trait = dragonrider
+		}
+	}
+	is_valid = { 
+		scope:actor = { 
+			is_available = yes
+		}
+	}
+	effect = {
+		scope:actor = {
+			start_travel_plan = {
+				destination = ROOT
+				on_arrival_event = zz_valyria_province.0001
+				on_arrival_destinations = all_but_last
+			}
+		}
+		
+	}
+}

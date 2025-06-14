@@ -96,4 +96,27 @@ types CountyViewTypes
 			}
 		}
 	}
+	type zz_dragon_visit_button = widget
+	{
+		size = { 32 32 }
+		button_round = {
+			name = "VIST_ON_DRAGON"
+			datacontext = "[GetScriptedGui( 'zz_valyria_dragon_visit' )]"
+			visible = "[GetScriptedGui('zz_valyria_dragon_visit').IsShown( GuiScope.SetRoot( HoldingView.GetProvince.MakeScope ).AddScope('actor', GetPlayer.MakeScope ).End)]"
+			enabled = "[GetScriptedGui('zz_valyria_dragon_visit').IsValid( GuiScope.SetRoot( HoldingView.GetProvince.MakeScope ).AddScope('actor', GetPlayer.MakeScope ).End)]"
+			tooltip = "VIST_ON_DRAGON_TT"
+			onclick = "[ScriptedGui.Execute( GuiScope.SetRoot( HoldingView.GetProvince.MakeScope ).AddScope('actor', GetPlayer.MakeScope ).End)]"
+			position = { 0 0 }
+			parentanchor = center
+			size = { 35 35 }
+			button_icon_highlight = {
+				texture = "gfx/interface/icons/point_of_interest_types/agot_poi_dragonlore.dds"
+				parentanchor = center
+				alwaystransparent = yes
+				size = { 25 25 }
+			}
+		}
+	}
 }
+
+	

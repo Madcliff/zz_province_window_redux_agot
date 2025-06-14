@@ -1,0 +1,18 @@
+﻿namespace = zz_valyria_province
+
+zz_valyria_province.0001 = {
+	hidden = yes
+	immediate = {
+		send_interface_toast = {
+			title = religious_decision.0210.toast
+			left_icon = root
+			current_travel_plan = {
+				delay_travel_plan = { days = 35 }
+			}
+		}
+		trigger_event = {
+			id = religious_decision.0211
+			days = meditation_duration
+		}
+	}
+}
