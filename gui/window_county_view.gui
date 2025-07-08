@@ -315,6 +315,7 @@ window = {
 							}
 						}
 						zz_dragon_visit_button = {}
+						zz_magic_cast_province_button = {}
 						
 
 						expand = {}
